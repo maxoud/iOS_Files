@@ -38,7 +38,15 @@
 */
 
 class Animal {
+    var name: String
     
+    func speak() {
+        
+    }//end func speak()
+    
+    required init(name: String) {
+        self.name = name
+    }//end init
 }//end class Animal
 
 /*:
@@ -49,6 +57,26 @@ class Animal {
 4. overrides the function `speak()` to greet you and says its name
 */
 
+class Dog: Animal {
+    var trickCount: Int
+    
+    convenience required init(name: String) {
+        self.init(name: name, trickCount: 0)
+    }//end init
+    
+    override func speak() {
+        print("Woof woof! The name is \(name)! Don't forget to dogument your code!")
+    }
+    
+    init(name: String, trickCount: Int) {
+        self.trickCount = trickCount
+        super.init(name: name)
+        speak()
+    }
+}//end class Dog
+
+Dog(name: "Bernard")
+
 /*:
  Add a second (non-required) initializer to `Dog` that takes both the `name` and `numTricksLearned` as parameters. Then call this initializer from the required initializer.
 */
@@ -56,3 +84,10 @@ class Animal {
 /*:
  In an extension, add a convenience initializer to `Dog` that defaults the dog's name to your favorite dog's name, with however many tricks the dog has learned.
 */
+extension Dog {
+    convenience init(trickCount: Int = 4) {
+        self.init(name: "Max", trickCount: trickCount)
+    }
+}//end extension Dog
+
+Dog().trickCount
